@@ -2,13 +2,13 @@
 
 import asyncio
 import json
-import random
 from dataclasses import dataclass
 from pathlib import Path
 
 from tqdm.auto import tqdm
 
 import swerl.agentless_mini.utils as utils
+import secrets
 
 
 @dataclass(frozen=True)
@@ -66,8 +66,8 @@ async def localize_files(
 
     def get_message():
         randomize = args.num_samples > 1
-        num_files = 5 if not randomize else random.randint(2, 5)
-        indentation = 4 if not randomize else random.choice([2, 4])
+        num_files = 5 if not randomize else secrets.SystemRandom().randint(2, 5)
+        indentation = 4 if not randomize else secrets.choice([2, 4])
         structure_string = utils.data.show_project_structure(
             structure, indentation=indentation, randomize=randomize
         ).strip()

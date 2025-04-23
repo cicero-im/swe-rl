@@ -3,13 +3,13 @@
 import ast
 import json
 import os
-import random
 import re
 import subprocess
 import uuid
 from collections import OrderedDict
 
 from .envs import PLAYGROUND_DIR, PROJECT_FILE_LOC
+import secrets
 
 
 def show_project_structure(
@@ -24,7 +24,7 @@ def show_project_structure(
 
     items = list(structure.items())
     if randomize:
-        random.shuffle(items)
+        secrets.SystemRandom().shuffle(items)
 
     for key, value in items:
         if "." in key and ".py" not in key:
