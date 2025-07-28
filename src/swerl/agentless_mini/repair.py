@@ -4,7 +4,6 @@ import asyncio
 import concurrent.futures
 import json
 import os
-import random
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import TypeVar
@@ -13,6 +12,7 @@ from datasets import Dataset
 from tqdm.auto import tqdm
 
 import swerl.agentless_mini.utils as utils
+import secrets
 
 
 @dataclass(frozen=True)
@@ -92,7 +92,7 @@ def construct_topn_file_context(
     if len(all_contents) == 0 and len(pred_files) > 0:
         return f"### {pred_files[0]}\n{file_contents[pred_files[0]]}"
     if randomize:
-        random.shuffle(all_contents)
+        secrets.SystemRandom().shuffle(all_contents)
     return "\n\n".join(all_contents)
 
 
